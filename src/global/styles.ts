@@ -1,19 +1,19 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, ThemeProps, ThemedGlobalStyledClassProps } from 'styled-components'
 
 const globalStyles = createGlobalStyle`
 
-  /* removendo a formatacao padrao do main*/
+  /* removendo a formatacao padrao*/
   * {
     margin: 0;
     padding: 0;    
   }
 
-  /* inserindo o font-size da tag HTML para ajuste em responsividade*/
+  /* inserindo o font-size da tag HTML para ajuste em responsividade */
   html{
     font-size: 62.5%;
   }
-  
-  /* inserindo o font-size da tag HTML para ajuste em responsividade*/
+
+  /* inserindo no corpo fontes padroes de cada sistema para melhorar o aspecto visual*/
   body{
     font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
   }
