@@ -1,12 +1,19 @@
-import * as React from 'react';
-import Main from './components/Main'
-import GlobalStyles from './global/styles'
+import * as React from "react";
+import { BrowserRouter } from "react-router-dom";
+import GlobalStyles from "./global/styles";
+import Main from "./pages/Main/main";
+import Routes from "./routes";
 
+//renderizando o componente principal e os estilos globais
 function App() {
   return (
     <>
-    <Main />
-    <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Main />
+        </Routes>
+      </BrowserRouter>
+      <GlobalStyles />
     </>
   );
 }

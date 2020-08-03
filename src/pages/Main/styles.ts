@@ -5,8 +5,8 @@ export const useStyles = makeStyles({
   container: {
     background: cor.branca,
     color: "white",
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -51,26 +51,25 @@ export const useStyles = makeStyles({
 
   cards: {
     background: cor.branca,
-    width: "100%",
-    height: "100%",
     margin: "10px",
     borderRadius: "10px",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     flexWrap: "wrap",
   },
 
   card: {
-    maxWidth: 200,
-    maxHeight: 240,
-    margin: "20px",
+    height: "auto",
+    marginTop: "20px",
+    marginRight: "20px",
+    boxShadow: "1px 1px 4px rgba(0,0,0,0.3)",
   },
 
   infosCard: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "left",
+    alignItems: "flex-start",
     justifyContent: "flex-start",
   },
 
@@ -82,6 +81,27 @@ export const useStyles = makeStyles({
   },
 
   button: {
+    textAlign: "center",
+    backgroundColor: "#5F6FDC",
     height: "40px",
+    textTransform: "none",
+    '&:hover': {
+      background: "#000",
+      color: "#fff"
+    },
+  },
+
+  link: {
+    textDecoration: "none",    
+  },
+
+  error: {
+    color: "black",
+    fontSize: "18px",
+  },
+
+  flag: {
+    width: "240px",
+    height: "140px",    
   }
 });

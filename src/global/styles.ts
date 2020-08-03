@@ -11,7 +11,6 @@ const globalStyles = createGlobalStyle`
   }
 
   /* inserindo o font-size da tag HTML para ajuste em responsividade */ 
-
   html, body{
     width: 100%;
     height: 100%;
