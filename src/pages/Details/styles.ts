@@ -5,8 +5,8 @@ export const useStyles = makeStyles({
   container: {
     background: cor.branca,
     color: "white",
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -31,10 +31,7 @@ export const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-start",
-    marginTop: "20px",
-    marginBottom: "20px",
-    padding: "10px",
+    justifyContent: "center",
     borderRadius: "10px",
   },
 

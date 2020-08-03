@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 import { client } from "../client";
 
 interface Props {
-  first: number,
-  offset: number
+  first: number;
+  offset: number;
 }
 
 export const GET_COUNTRIES = client.query({
@@ -16,16 +16,16 @@ export const GET_COUNTRIES = client.query({
         area
         population
         flag {
-          _id
-          emoji
-          emojiUnicode
           svgFile
+        }
+        topLevelDomains {
+          name
         }
       }
     }
   `,
-  variables: {
-    first: 8,
-    offset: 4,
-  },
-});
+  // variables: {
+  //   first: 8,
+  //   offset: 8,
+  // },
+},  );

@@ -8,8 +8,8 @@ import Main from "../src/pages/Main/main";
 
 const Routes = (props:any) => (
   <Switch>
-    <Route path="/" exact={true} component={Main} />
-    <Route path="/details" exact={true} component={Details} />
+    <Route path="/" exact component={Main} />
+    <Route path="/details" component={Details} />
   </Switch>
 );
 export default Routes;

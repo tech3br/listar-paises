@@ -24,6 +24,18 @@ Object {
           <section
             class="MuiBox-root MuiBox-root-17 makeStyles-cards-5"
           />
+          <form
+            class="search"
+          >
+            <input
+              type="text"
+              value="teste"
+            />
+            <input
+              type="submit"
+              value="Digite"
+            />
+          </form>
         </section>
       </section>
     </div>
@@ -48,6 +60,18 @@ Object {
         <section
           class="MuiBox-root MuiBox-root-17 makeStyles-cards-5"
         />
+        <form
+          class="search"
+        >
+          <input
+            type="text"
+            value="teste"
+          />
+          <input
+            type="submit"
+            value="Digite"
+          />
+        </form>
       </section>
     </section>
   </div>,

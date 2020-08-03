@@ -15,10 +15,13 @@ export interface Country {
   area: string;
   population: string;
   flag: FlagCountry;
+  topLevelDomains: [{
+    name: string;
+  }];
 }
 
 export interface CountriesState {
-  readonly data: Country[];
+  readonly data: Object;
   readonly loading: boolean;
   readonly error: boolean;
 }

@@ -16,7 +16,7 @@ export const useStyles = makeStyles({
   header: {
     background: cor.tom5,
     color: "white",
-    width: "100vw",
+    width: "100%",
     height: "40px",
     display: "flex",
     flexDirection: "column",
@@ -26,15 +26,12 @@ export const useStyles = makeStyles({
 
   contentBox: {
     background: cor.tom3,
-    width: "90%",
+    width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    marginTop: "20px",
-    marginBottom: "20px",
-    padding: "10px",
     borderRadius: "10px",
   },
 
@@ -64,6 +61,11 @@ export const useStyles = makeStyles({
     marginTop: "20px",
     marginRight: "20px",
     boxShadow: "1px 1px 4px rgba(0,0,0,0.3)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "232px",
   },
 
   infosCard: {
@@ -82,13 +84,21 @@ export const useStyles = makeStyles({
 
   button: {
     textAlign: "center",
+    color: "#fff",
     backgroundColor: "#5F6FDC",
+    width: "200px",
     height: "40px",
     textTransform: "none",
     '&:hover': {
       background: "#000",
       color: "#fff"
     },
+    textDecoration: "none", 
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "10px",
   },
 
   link: {
