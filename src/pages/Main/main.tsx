@@ -1,3 +1,4 @@
+import { TextField } from "@material-ui/core";
 import {
   Box,
   Card,
@@ -6,10 +7,9 @@ import {
   CardMedia,
   Typography
 } from "@material-ui/core/";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Search from "../../components/Search/search";
 import { GET_COUNTRIES } from "../../graphql/queries/get_countries";
 import { getCountry } from "../../redux/store/countries/actions";
 import { Country } from "../../redux/store/countries/types";
@@ -55,6 +55,30 @@ const Main = () => {
     );
   }, [state]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<Country[]>();
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+  const [verdadeiro, setVerdadeiro] = useState(true);
+
+  useEffect(() => {
+    if (verdadeiro && state !== []) {
+      setSearchResults(state);
+      setVerdadeiro(false);
+    } else {
+      const results =
+        state &&
+        state
+          .map((item) => item)
+          .filter(({ name }) => name.toLowerCase().includes(searchTerm));
+
+      setSearchResults(results);
+    }
+  }, [searchTerm, state, verdadeiro]);
+
+  console.log(state)
+
   return (
     <Box component="section" className={styles.container}>
       <Box component="header" className={styles.header}>
@@ -66,15 +90,18 @@ const Main = () => {
         </Box>
         {!errors ? (
           <>
-            <Search
-              onChange={() => {
-                console.log("digitei");
-              }}
-              placeholder="Digite o nome do pais"
+            <TextField
+              id="standard-basic"
+              label="Pesquisar"
+              name="area"
+              value={searchTerm}
+              onChange={handleChange}
+              type="text"
+              placeholder="Busque pelo nome do pais"
             />
             <Box component="section" className={styles.cards}>
-              {state &&
-                state.map((item) => (
+              {searchResults &&
+                searchResults.map((item) => (
                   <Card key={item._id} className={styles.card}>
                     <CardMedia
                       className={styles.flag}
