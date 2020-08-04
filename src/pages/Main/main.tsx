@@ -10,6 +10,7 @@ import {
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading/loading";
 import { GET_COUNTRIES } from "../../graphql/queries/get_countries";
 import { getCountry } from "../../redux/store/countries/actions";
 import { Country } from "../../redux/store/countries/types";
@@ -77,8 +78,6 @@ const Main = () => {
     }
   }, [searchTerm, state, verdadeiro]);
 
-  console.log(state)
-
   return (
     <Box component="section" className={styles.container}>
       <Box component="header" className={styles.header}>
@@ -100,7 +99,10 @@ const Main = () => {
               placeholder="Busque pelo nome do pais"
             />
             <Box component="section" className={styles.cards}>
-              {searchResults &&
+              {!state ? (
+                <Loading />
+              ) : (
+                searchResults &&
                 searchResults.map((item) => (
                   <Card key={item._id} className={styles.card}>
                     <CardMedia
@@ -138,7 +140,8 @@ const Main = () => {
                       </Link>
                     </CardActions>
                   </Card>
-                ))}
+                ))
+              )}
             </Box>
           </>
         ) : (
