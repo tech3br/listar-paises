@@ -1,8 +1,9 @@
 import { Box, Button, CardMedia } from "@material-ui/core/";
 import ModalComponent from "components/Modal/Modal";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCountry } from "redux/store/countries/actions";
 import { Country } from "redux/store/countries/types";
 import { useStyles } from "./styles";
 
@@ -19,30 +20,48 @@ interface IModalProps {
 const Details = () => {
   //guardando os estilos do material-ui numa constante styles
   const styles = useStyles();
+  const dispatch = useDispatch();
   //definindo useSelector
   const [showModal, setShowModal] = useState<IModalProps>({ value: false });
-  const [dataCountry, setDataCountry] = useState<Country>({
-      _id: 0,
-      name: "",
-      capital: "",
-      area: "",
-      flag: {
-        svgFile: "",
+  const [dataCountry, setDataCountry] = useState<IDataCountries>({
+    countries: {
+      data: {
+        _id: 0,
+        name: "",
+        capital: "",
+        area: "",
+        flag: {
+          svgFile: "",
+        },
+        population: "",
+        topLevelDomains: [
+          {
+            name: "",
+          },
+        ],
       },
-      population: "",
-      topLevelDomains: "",
-    } as Country);
+    },
+  } as IDataCountries);
 
   const countryData = useSelector(
     (state: IDataCountries) => state.countries.data
   );
 
-  function handleEdit(){
-    setShowModal({value: true})
+  function handleEdit() {
+    setShowModal({ value: true });
   }
-  function handleClose(){
-    setShowModal({value: false})
+  function handleClose() {
+    setShowModal({ value: false });
   }
+
+  useEffect(() => {
+    const getData = localStorage.getItem(String(countryData._id))
+    if(getData){
+      const data = JSON.parse(getData) 
+      dispatch(getCountry(data))
+    }
+
+  }, []);
 
   return (
     <Box component="section" className={styles.container}>
@@ -79,9 +98,9 @@ const Details = () => {
           <span className={styles.link}>
             População: {countryData.population}
           </span>
-          {/* <span className={styles.link}>
+          <span className={styles.link}>
             Top-Level Domain: {countryData.topLevelDomains[0].name}
-          </span> */}
+          </span>
           <Button onClick={handleEdit}>Editar</Button>
         </Box>
       </Box>

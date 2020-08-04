@@ -80,6 +80,7 @@ export const useStyles = makeStyles({
     height: "40px",    
     textDecoration: "none",
     color: "#ffffff",
+    background: "#000",
   },
 
   error: {

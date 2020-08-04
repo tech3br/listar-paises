@@ -6,7 +6,7 @@ interface FlagCountry {
   _id: string;
   emoji: string;
   emojiUnicode: string;
-  svgFile: string;
+  svgFile?: string;
 }
 
 export interface Country {
@@ -16,9 +16,9 @@ export interface Country {
   area: string;
   population: string;
   flag?: FlagCountry;
-  topLevelDomains?: [{
+  topLevelDomains: {
     name: string;
-  }] | string;
+  }[];
 }
 
 export interface CountriesState {

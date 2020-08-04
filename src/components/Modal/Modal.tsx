@@ -7,7 +7,7 @@ import Slide from "@material-ui/core/Slide";
 import TextField from "@material-ui/core/TextField";
 import { TransitionProps } from "@material-ui/core/transitions";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCountry } from "redux/store/countries/actions";
 import { Country } from "redux/store/countries/types";
 import { useStyles } from "./styles";
@@ -25,6 +25,47 @@ interface IMessageSucessProps {
   value: string;
 }
 
+interface IDataCountries {
+  countries: {
+    data: Country;
+  };
+}
+
+interface ICountryData {
+  topLevelDomains: {
+    name: string;
+  }[];
+}
+
+interface IValueDataCountry {
+  _id: number;
+  name: string;
+  capital: string;
+  area: string;
+  population: string;
+  svgFile: string;
+  topLevelDomains: string;
+}
+
+interface IFlag {
+  _id: number;
+  name: string;
+  capital: string;
+  area: string;
+  population: string;
+  flag?: {
+    _id?: string;
+    emoji?: string;
+    emojiUnicode?: string;
+    svgFile?: string;
+  };
+  topLevelDomains: [
+    {
+      name: string;
+    }
+  ];
+}
+
 //transicao no modal
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -34,34 +75,52 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ModalComponent = (props: Props) => {
-  const [messageSucess, setMwessageSucess] = useState<IMessageSucessProps>();
-
-  const [dataCountry, setDataCountry] = useState<Country>({
-    _id: 0,
-    name: "",
-    capital: "",
-    area: "",
-    population: "",
-    flag: {
-      svgFile: "",
-    },
-    topLevelDomains: "",
-  } as Country);
-
   const styles = useStyles();
-
   const dispatch = useDispatch();
+  const [messageSucess, setMessageSucess] = useState<IMessageSucessProps>();
+
+  const countryData = useSelector(
+    (state: IDataCountries) => state.countries.data
+  );
+
+  const [dataCountry, setDataCountry] = useState<IValueDataCountry>({
+    _id: countryData._id,
+    name: countryData.name,
+    capital: countryData.capital,
+    area: countryData.area,
+    population: countryData.population,
+    svgFile: countryData.flag?.svgFile,
+    topLevelDomains: countryData.topLevelDomains[0].name,
+  } as IValueDataCountry);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    dispatch(getCountry(dataCountry));
-    setMwessageSucess({ value: "Dados Alterados!" });
+    const dataCountries: Country = {
+      _id: dataCountry._id,
+      name: dataCountry.name,
+      capital: dataCountry.capital,
+      area: dataCountry.area,
+      population: dataCountry.population,
+      flag: {
+        svgFile: dataCountry.svgFile,
+      },
+      topLevelDomains: [
+        {
+          name: dataCountry.topLevelDomains,
+        },
+      ],
+    } as Country;
+    localStorage.setItem(String(dataCountries._id), JSON.stringify(dataCountries))
+    dispatch(getCountry(dataCountries));
+    setMessageSucess({ value: "Dados Alterados!" });
+    props.handleClose()
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     setDataCountry({ ...dataCountry, [name]: value });
   }
+
 
   return (
     <div>
@@ -88,37 +147,36 @@ const ModalComponent = (props: Props) => {
               label="Nome"
               name="name"
               onChange={handleInputChange}
-              required
+              value={dataCountry.name}
             />
             <TextField
               id="standard-basic"
               label="Capital"
               name="capital"
               onChange={handleInputChange}
-              required
+              value={dataCountry.capital}
             />
             <TextField
               id="standard-basic"
               label="Area"
               name="area"
               onChange={handleInputChange}
-              required
+              value={dataCountry.area}
             />
             <TextField
               id="standard-basic"
               label="Populacao"
               name="population"
               onChange={handleInputChange}
-              required
+              value={dataCountry.population}
             />
             <TextField
               id="standard-basic"
               label="Top-Level Domain"
-              name="topLevelDomain"
+              name="topLevelDomains"
               onChange={handleInputChange}
-              required
+              value={dataCountry.topLevelDomains}
             />
-
             <DialogActions>
               <Button
                 variant="contained"
