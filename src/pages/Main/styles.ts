@@ -25,7 +25,7 @@ export const useStyles = makeStyles({
   },
 
   contentBox: {
-    background: cor.cinza,
+    background: cor.tom3,
     width: "90%",
     height: "100%",
     display: "flex",
@@ -33,7 +33,8 @@ export const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: "10px",
-    marginTop: "10px",    },
+    marginTop: "10px",
+  },
 
   titleContentBox: {
     background: cor.tom5,

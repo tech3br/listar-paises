@@ -43,6 +43,11 @@ const Main = () => {
     dispatch(getCountry(item));
   }
 
+  // function filterByInput(event: ChangeEvent<HTMLInputElement>) {
+  //   let inputValue = event.target.value;
+  //   dispatch(filterByName({ name: inputValue }));
+  // }
+
   //usando useEffect para trazer os dados assim que o componente foi montado
   useEffect(() => {
     GET_COUNTRIES.then((result) => setState(result.data.Country)).catch((err) =>
@@ -50,7 +55,6 @@ const Main = () => {
     );
   }, [state]);
 
-  console.log(state);
   return (
     <Box component="section" className={styles.container}>
       <Box component="header" className={styles.header}>

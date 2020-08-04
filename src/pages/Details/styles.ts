@@ -31,8 +31,9 @@ export const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     borderRadius: "10px",
+    marginTop: "10px",
   },  
 
   titleContentBox: {

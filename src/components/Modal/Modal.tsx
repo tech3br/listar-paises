@@ -21,6 +21,10 @@ interface Props {
   handleEdit(): void;
 }
 
+interface IMessageSucessProps {
+  value: string;
+}
+
 //transicao no modal
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -30,7 +34,8 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ModalComponent = (props: Props) => {
-  
+  const [messageSucess, setMwessageSucess] = useState<IMessageSucessProps>();
+
   const [dataCountry, setDataCountry] = useState<Country>({
     _id: 0,
     name: "",
@@ -38,7 +43,7 @@ const ModalComponent = (props: Props) => {
     area: "",
     population: "",
     flag: {
-      svgFile: ""
+      svgFile: "",
     },
     topLevelDomains: "",
   } as Country);
@@ -50,6 +55,7 @@ const ModalComponent = (props: Props) => {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     dispatch(getCountry(dataCountry));
+    setMwessageSucess({ value: "Dados Alterados!" });
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -70,6 +76,7 @@ const ModalComponent = (props: Props) => {
           {props.titleModal}
         </DialogTitle>
         <DialogContent>
+          {messageSucess?.value}
           <form
             onSubmit={handleSubmit}
             className={styles.form}
@@ -81,19 +88,37 @@ const ModalComponent = (props: Props) => {
               label="Nome"
               name="name"
               onChange={handleInputChange}
+              required
             />
-            <TextField id="standard-basic" label="Capital" name="capital" />
-            <TextField id="standard-basic" label="Area" name="area" />
+            <TextField
+              id="standard-basic"
+              label="Capital"
+              name="capital"
+              onChange={handleInputChange}
+              required
+            />
+            <TextField
+              id="standard-basic"
+              label="Area"
+              name="area"
+              onChange={handleInputChange}
+              required
+            />
             <TextField
               id="standard-basic"
               label="Populacao"
               name="population"
+              onChange={handleInputChange}
+              required
             />
             <TextField
               id="standard-basic"
               label="Top-Level Domain"
               name="topLevelDomain"
+              onChange={handleInputChange}
+              required
             />
+
             <DialogActions>
               <Button
                 variant="contained"

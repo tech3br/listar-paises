@@ -1,4 +1,12 @@
-import { Country, CountryActionTypes, EDIT_COUNTRY, GET_COUNTRY } from './types'
+import { Country, CountryActionTypes, CountryFilter, EDIT_COUNTRY, FILTER_BY_VALUE, GET_COUNTRY } from './types'
+
+export function filterByName(name: CountryFilter): CountryActionTypes{
+  return {
+    type: FILTER_BY_VALUE,
+    payload: name
+  }
+}
+
 
 export function getCountry(data: Country): CountryActionTypes {
   return {
