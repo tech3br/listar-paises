@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { client } from "../client";
 
+//definindo tipos para as variaveis, caso haja paginacao passar as variaveis
 interface Props {
   first: number;
   offset: number;

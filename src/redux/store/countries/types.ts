@@ -9,15 +9,15 @@ interface FlagCountry {
 }
 
 export interface Country {
-  _id: string;
+  _id?: number;
   name: string;
   capital: string;
   area: string;
   population: string;
-  flag: FlagCountry;
-  topLevelDomains: [{
+  flag?: FlagCountry;
+  topLevelDomains?: [{
     name: string;
-  }];
+  }] | string;
 }
 
 export interface CountriesState {

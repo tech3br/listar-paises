@@ -2,18 +2,21 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import TextField from "@material-ui/core/TextField";
 import { TransitionProps } from "@material-ui/core/transitions";
-import React from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getCountry } from "redux/store/countries/actions";
+import { Country } from "redux/store/countries/types";
+import { useStyles } from "./styles";
 
 interface Props {
   open: boolean;
   textEdit: string;
   textClose: string;
   titleModal: string;
-  contentModal: string;
   handleClose(): void;
   handleEdit(): void;
 }
@@ -27,6 +30,33 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const ModalComponent = (props: Props) => {
+  
+  const [dataCountry, setDataCountry] = useState<Country>({
+    _id: 0,
+    name: "",
+    capital: "",
+    area: "",
+    population: "",
+    flag: {
+      svgFile: ""
+    },
+    topLevelDomains: "",
+  } as Country);
+
+  const styles = useStyles();
+
+  const dispatch = useDispatch();
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    dispatch(getCountry(dataCountry));
+  }
+
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setDataCountry({ ...dataCountry, [name]: value });
+  }
+
   return (
     <div>
       <Dialog
@@ -40,18 +70,45 @@ const ModalComponent = (props: Props) => {
           {props.titleModal}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {props.contentModal}
-          </DialogContentText>
+          <form
+            onSubmit={handleSubmit}
+            className={styles.form}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="standard-basic"
+              label="Nome"
+              name="name"
+              onChange={handleInputChange}
+            />
+            <TextField id="standard-basic" label="Capital" name="capital" />
+            <TextField id="standard-basic" label="Area" name="area" />
+            <TextField
+              id="standard-basic"
+              label="Populacao"
+              name="population"
+            />
+            <TextField
+              id="standard-basic"
+              label="Top-Level Domain"
+              name="topLevelDomain"
+            />
+            <DialogActions>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={props.handleEdit}
+                type="submit"
+              >
+                {props.textEdit}
+              </Button>
+              <Button color="primary" onClick={props.handleClose}>
+                {props.textClose}
+              </Button>
+            </DialogActions>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={props.handleEdit}>
-            {props.textEdit}
-          </Button>
-          <Button color="primary" onClick={props.handleClose}>
-            {props.textClose}
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

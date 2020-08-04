@@ -1,21 +1,24 @@
+import { TextField } from "@material-ui/core";
 import React from "react";
 
 interface SearchProps {
-  value: string;
+  value?: string;
   onChange(): void;
-  onClick(): void;
+  placeholder: string;
 }
 
 const Search = (props: SearchProps) => {
-
   return (
     <form className="search">
-      <input
+      <TextField
+        id="standard-basic"
+        label="Pesquisar"
+        name="area"
         value={props.value}
         onChange={props.onChange}
         type="text"
+        placeholder={props.placeholder}
       />
-      <input onClick={props.onClick} type="submit" value="Digite" />
     </form>
   );
 };

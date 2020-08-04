@@ -25,15 +25,15 @@ export const useStyles = makeStyles({
   },
 
   contentBox: {
-    background: cor.tom3,
-    width: "100%",
+    background: cor.cinza,
+    width: "90%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: "10px",
-  },
+    marginTop: "10px",    },
 
   titleContentBox: {
     background: cor.tom5,

@@ -66,10 +66,7 @@ const Main = () => {
               onChange={() => {
                 console.log("digitei");
               }}
-              value={"teste"}
-              onClick={() => {
-                console.log("cliquei");
-              }}
+              placeholder="Digite o nome do pais"
             />
             <Box component="section" className={styles.cards}>
               {state &&
@@ -79,7 +76,7 @@ const Main = () => {
                       className={styles.flag}
                       component="img"
                       alt="Contemplative Reptile"
-                      image={item.flag.svgFile}
+                      image={item.flag?.svgFile}
                       title="Contemplative Reptile"
                     />
                     <CardContent className={styles.infosCard}>

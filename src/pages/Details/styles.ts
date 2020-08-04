@@ -33,7 +33,7 @@ export const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "10px",
-  },
+  },  
 
   titleContentBox: {
     background: cor.tom5,
@@ -70,9 +70,15 @@ export const useStyles = makeStyles({
   },
 
   button: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     textAlign: "center",
     backgroundColor: "#5F6FDC",
     height: "40px",    
+    textDecoration: "none",
+    color: "#ffffff",
   },
 
   error: {

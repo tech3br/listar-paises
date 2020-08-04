@@ -1,5 +1,6 @@
-import { Box, CardMedia } from "@material-ui/core/";
-import React, { useEffect, useState } from "react";
+import { Box, Button, CardMedia } from "@material-ui/core/";
+import ModalComponent from "components/Modal/Modal";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Country } from "redux/store/countries/types";
@@ -11,31 +12,48 @@ interface IDataCountries {
   };
 }
 
+interface IModalProps {
+  value: boolean;
+}
 //definindo o componente como funcional
 const Details = () => {
   //guardando os estilos do material-ui numa constante styles
   const styles = useStyles();
   //definindo useSelector
-  const countryData = useSelector(
-    (state: IDataCountries) => state?.countries.data
-    );
-    
-  const [name, setName] = useState("");
-  const [capital, setCapital] = useState("");
-  const [area, setArea] = useState("");
-  const [population, setPopulation] = useState("");
-  const [topleveldomain, setTopLevelDomain] = useState("");
+  const [showModal, setShowModal] = useState<IModalProps>({ value: false });
+  const [dataCountry, setDataCountry] = useState<Country>({
+      _id: 0,
+      name: "",
+      capital: "",
+      area: "",
+      flag: {
+        svgFile: "",
+      },
+      population: "",
+      topLevelDomains: "",
+    } as Country);
 
-  useEffect(() => {
-    setName(countryData.name)
-    setCapital(countryData.capital)
-    setArea(countryData.area)
-    setPopulation(countryData.population)
-    setTopLevelDomain(countryData.topLevelDomains[0].name)
-  }, []);
+  const countryData = useSelector(
+    (state: IDataCountries) => state.countries.data
+  );
+
+  function handleEdit(){
+    setShowModal({value: true})
+  }
+  function handleClose(){
+    setShowModal({value: false})
+  }
 
   return (
     <Box component="section" className={styles.container}>
+      <ModalComponent
+        handleClose={handleClose}
+        handleEdit={() => {}}
+        textClose="Fechar"
+        textEdit="Editar"
+        titleModal="Altere as informações do pais:"
+        open={showModal?.value}
+      />
       <Box component="header" className={styles.header}>
         Desafio Tecnico Softplan - Daniel Filgueira da Silva
       </Box>
@@ -48,29 +66,23 @@ const Details = () => {
         </Box>
 
         <Box component="section" className={styles.cards}>
-          {/* <span className={styles.link}>Bandeira: {countryData && countryData.flag.svgFile}</span> */}
           <CardMedia
             className={styles.flag}
             component="img"
             alt="Contemplative Reptile"
-            image={countryData && countryData.flag.svgFile}
+            image={countryData.flag?.svgFile}
             title="Contemplative Reptile"
           />
+          <span className={styles.link}>Nome: {countryData.name}</span>
+          <span className={styles.link}>Capital: {countryData.capital}</span>
+          <span className={styles.link}>Area: {countryData.area}</span>
           <span className={styles.link}>
-            Nome: {name}
+            População: {countryData.population}
           </span>
-          <span className={styles.link}>
-            Capital: {capital}
-          </span>
-          <span className={styles.link}>
-            Area: {area}
-          </span>
-          <span className={styles.link}>
-            População: {population}
-          </span>
-          <span className={styles.link}>
-            Top-Level Domain: {topleveldomain}
-          </span>
+          {/* <span className={styles.link}>
+            Top-Level Domain: {countryData.topLevelDomains[0].name}
+          </span> */}
+          <Button onClick={handleEdit}>Editar</Button>
         </Box>
       </Box>
     </Box>
