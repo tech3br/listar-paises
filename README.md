@@ -1,5 +1,3 @@
-This project tem como escopo a obtencao da vaga na Softplan
-
 ## Scripts Disponiveis
 
 ### `yarn start`
