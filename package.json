@@ -18,7 +18,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.1",
     "apollo-client": "^2.6.10",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "graphql": "^15.3.0",
     "graphql-request": "^2.0.0",
     "react": "^16.13.1",
